@@ -1,0 +1,2 @@
+[console_scripts]
+ragintel = ragintel.cli:main

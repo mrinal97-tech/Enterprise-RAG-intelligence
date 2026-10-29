@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: enterprise-rag-intelligence
+Version: 0.1.0
+Summary: An enterprise document intelligence system using hybrid search, RAG, and LLM evaluation to deliver accurate, source-grounded answers from internal knowledge bases.
+License: MIT
+Requires-Python: <3.13,>=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastapi<1.0,>=0.110
+Requires-Dist: uvicorn<1.0,>=0.29
+Requires-Dist: pydantic<3,>=2.6
+Requires-Dist: pydantic-settings<3,>=2.2
+Requires-Dist: pypdf<7,>=4.2
+Requires-Dist: numpy<3,>=1.26
+Requires-Dist: httpx<1,>=0.27
+Requires-Dist: python-multipart>=0.0.9
+Provides-Extra: ml
+Requires-Dist: sentence-transformers<6,>=3.0; extra == "ml"
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: pytest-cov>=5; extra == "dev"
+Requires-Dist: reportlab>=4; extra == "dev"
+Dynamic: license-file
+
+"# Enterprise-RAG-intelligence" 
+An enterprise document intelligence system using hybrid search, RAG, and LLM evaluation to deliver accurate, source-grounded answers from internal knowledge bases.
+
+Status: under construction. The full README arrives with the documentation milestone.

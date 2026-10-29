@@ -1,0 +1,49 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# --- Virtual environments ---
+.venv/
+venv/
+
+# --- Secrets and local configuration (NEVER commit) ---
+.env
+config/users.json
+
+# --- Runtime data: databases, indexes, uploaded documents ---
+data/runtime/
+data/private/
+*.db
+*.db-wal
+*.db-shm
+
+# --- Model caches (can be hundreds of MB) ---
+.cache/
+models/
+
+# --- Tooling caches ---
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Evaluation: keep committed reports, ignore scratch runs ---
+eval/results/scratch/
+
+# --- Editors / OS ---
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Public reference PDFs: downloaded by script, not committed ---
+data/public_docs/*.pdf

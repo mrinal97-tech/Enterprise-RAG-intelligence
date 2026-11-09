@@ -38,13 +38,16 @@ class Settings(BaseSettings):
     reranker: Literal["none", "cross-encoder"] = "none"
     reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
  
-    # Generation
-    llm_provider: Literal["ollama", "openai_compatible", "extractive"] = "ollama"
+     # --------------------------------------------------
+    # LLM generation - Ollama
+    # --------------------------------------------------
+
     ollama_url: str = "http://localhost:11434"
+
     llm_model: str = "llama3.2:3b"
-    openai_base_url: str = ""
-    openai_api_key: str = ""
+
     llm_timeout_s: float = Field(120.0, gt=0)
+
     max_question_chars: int = Field(1000, ge=10)
  
     log_level: str = "INFO"

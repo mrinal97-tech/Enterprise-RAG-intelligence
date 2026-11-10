@@ -17,15 +17,48 @@ import os
 _configured = False
 
 
+
 def configure_logging(level: str = "INFO") -> None:
     global _configured
+
+    # 1. Validate logging level
+    valid_levels = {
+        "DEBUG",
+        "INFO",
+        "WARNING",
+        "ERROR",
+        "CRITICAL",
+    }
+
+    normalized_level = level.upper()
+
+    if normalized_level not in valid_levels:
+        raise ValueError(f"Invalid logging level: {level}")
+
+    # 2. Get root logger
     root = logging.getLogger()
-    root.setLevel(level.upper())
+
+    # 3. Apply logging level
+    root.setLevel(normalized_level)
+
+    # 4. Avoid duplicate handlers
     if _configured:
         return
+
+    # 5. Create terminal logging handler
     handler = logging.StreamHandler(sys.stderr)
-    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s | %(message)s"))
+
+    # 6. Define log format
+    handler.setFormatter(
+        logging.Formatter(
+            "%(asctime)s %(levelname)s %(name)s | %(message)s"
+        )
+    )
+
+    # 7. Attach handler to root logger
     root.addHandler(handler)
+
+    # 8. Mark logging as configured
     _configured = True
 
 

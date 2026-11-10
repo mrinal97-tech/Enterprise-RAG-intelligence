@@ -11,6 +11,8 @@ from __future__ import annotations
 import hashlib
 import logging
 import sys
+import hmac
+import os
 
 _configured = False
 
@@ -28,5 +30,10 @@ def configure_logging(level: str = "INFO") -> None:
 
 
 def fingerprint(text: str) -> str:
-    """Short, non-reversible id for a piece of text (for log correlation only)."""
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:12]
+    secret = os.environ["RAG_LOG_FINGERPRINT_KEY"].encode("utf-8")
+
+    return hmac.new(
+        secret,
+        text.encode("utf-8"),
+        hashlib.sha256
+    ).hexdigest()[:16]

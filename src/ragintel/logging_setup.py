@@ -9,10 +9,10 @@ across log lines without storing it.
 from __future__ import annotations
 
 import hashlib
-import logging
-import sys
 import hmac
+import logging
 import os
+import sys
 
 _configured = False
 

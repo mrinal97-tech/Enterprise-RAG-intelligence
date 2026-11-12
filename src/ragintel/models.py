@@ -42,7 +42,7 @@ class DocumentRecord:
     
     
 @dataclass(frozen=True)
-class Pricipal:
+class Principal:
      """Who is asking. Every retrieval call requires one; there is no 'unfiltered' path."""
      
      user_id:str

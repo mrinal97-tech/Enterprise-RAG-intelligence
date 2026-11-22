@@ -12,10 +12,9 @@ from ragintel.models import Principal
 def test_defaults_are_safe():
     s = Settings(_env_file=None)
     assert s.retrieval_mode == "vector"
-    assert s.openai_api_key == ""  # no secret is ever defaulted
+    assert s.llm_provider == "ollama"
     assert s.max_upload_bytes == 20 * 1024 * 1024
-
-
+    
 def test_env_var_overrides(monkeypatch):
     monkeypatch.setenv("RAG_TOP_K", "7")
     assert Settings(_env_file=None).top_k == 7

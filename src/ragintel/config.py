@@ -42,6 +42,8 @@ class Settings(BaseSettings):
     # LLM generation - Ollama
     # --------------------------------------------------
 
+    llm_provider: Literal["ollama", "extractive"] = "ollama"
+
     ollama_url: str = "http://localhost:11434"
 
     llm_model: str = "llama3.2:3b"

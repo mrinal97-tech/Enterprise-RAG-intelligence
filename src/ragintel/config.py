@@ -1,3 +1,10 @@
+"""Central configuration.
+
+Every tunable value lives here. Values come from (highest priority first):
+environment variables prefixed RAG_, then a local .env file, then the defaults below.
+Secrets (API keys) are only ever read from the environment / .env, never hard-coded.
+"""
+
 from __future__ import annotations
  
 from functools import lru_cache

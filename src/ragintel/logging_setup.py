@@ -63,10 +63,19 @@ def configure_logging(level: str = "INFO") -> None:
 
 
 def fingerprint(text: str) -> str:
-    secret = os.environ["RAG_LOG_FINGERPRINT_KEY"].encode("utf-8")
+    """Short, non-reversible id for a piece of text (for log correlation only).
+
+    Uses an HMAC with a secret key so short, guessable text (for example
+    "salary of G4") cannot be matched by hashing guesses.
+    """
+    key = os.environ.get("RAG_LOG_FINGERPRINT_KEY")
+    if not key:
+        raise RuntimeError(
+            "RAG_LOG_FINGERPRINT_KEY is not set. Set it in your terminal or deployment environment."
+        )
 
     return hmac.new(
-        secret,
+        key.encode("utf-8"),
         text.encode("utf-8"),
-        hashlib.sha256
+        hashlib.sha256,
     ).hexdigest()[:16]

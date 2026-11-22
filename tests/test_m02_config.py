@@ -37,9 +37,23 @@ def test_errors_carry_code_and_status():
     assert (err.code, err.http_status, err.message) == ("file_too_large", 413, "too big")
 
 
-def test_fingerprint_is_stable_and_not_the_text():
+def test_fingerprint_is_stable_and_not_the_text(monkeypatch):
+    monkeypatch.setenv("RAG_LOG_FINGERPRINT_KEY", "test-key")
     assert fingerprint("salary of G4") == fingerprint("salary of G4")
     assert "salary" not in fingerprint("salary of G4")
+
+
+def test_fingerprint_depends_on_the_key(monkeypatch):
+    monkeypatch.setenv("RAG_LOG_FINGERPRINT_KEY", "key-one")
+    first = fingerprint("salary of G4")
+    monkeypatch.setenv("RAG_LOG_FINGERPRINT_KEY", "key-two")
+    assert fingerprint("salary of G4") != first
+
+
+def test_fingerprint_without_key_fails_clearly(monkeypatch):
+    monkeypatch.delenv("RAG_LOG_FINGERPRINT_KEY", raising=False)
+    with pytest.raises(RuntimeError, match="RAG_LOG_FINGERPRINT_KEY"):
+        fingerprint("anything")
 
 
 def test_principal_is_immutable():
